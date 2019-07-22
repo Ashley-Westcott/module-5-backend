@@ -11,9 +11,13 @@ Traveler.create(firstname: "Jill", lastname: "Westcott", birthday: "04/12/1996",
 
 Trip.create(trip_name: "New Zealand & Australia", start_date: "2019-06-17 21:02:34", end_date: "2019-06-19 21:02:34", traveler_id: 1)
 Trip.create(trip_name: "Argentina & Brazil", start_date: "2019-06-17 21:02:34", end_date: "2019-06-19 21:02:34", traveler_id: 2)
+Trip.create(trip_name: "Canada & United States", start_date: "2019-06-20 21:02:34", end_date: "2019-06-24 21:02:34", traveler_id: 1)
 
 Detail.create(google_maps_info: "New Zealand", category: "location", notes: "TBD", start_date: "2019-06-17 21:02:34", end_date: "2019-06-18 21:02:34", trip_id: 1)
 Detail.create(google_maps_info: "Australia", category: "location", notes: "TBD", start_date: "2019-06-18 21:02:34", end_date: "2019-06-19 21:02:34", trip_id: 1)
 
 Detail.create(google_maps_info: "Argentina", category: "location", notes: "TBD", start_date: "2019-06-17 21:02:34", end_date: "2019-06-18 21:02:34", trip_id: 2)
 Detail.create(google_maps_info: "Brazil", category: "location", notes: "TBD", start_date: "2019-06-18 21:02:34", end_date: "2019-06-19 21:02:34", trip_id: 2)
+
+Detail.create(google_maps_info: "Canada", category: "location", notes: "TBD", start_date: "2019-06-20 21:02:34", end_date: "2019-06-22 21:02:34", trip_id: 3)
+Detail.create(google_maps_info: "United States", category: "location", notes: "TBD", start_date: "2019-06-23 21:02:34", end_date: "2019-06-24 21:02:34", trip_id: 3)

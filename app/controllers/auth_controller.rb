@@ -1,17 +1,27 @@
 class AuthController < ApplicationController
   # skip_before_action :authorized, only: [:create]
 
-  def create
-    @traveler = Traveler.find_by(username: params[:username])
+  def login
+    # byebug
+    traveler = Traveler.find_by(username: params[:username])
     #Traveler#authenticate comes from BCrypt
-    if @traveler && @traveler.authenticate(params[:password])
+    if traveler && traveler.authenticate(params[:password])
       # encode token comes from ApplicationController
-      token = encode_token({ traveler_id: @traveler.id })
-      render json: { traveler: TravelerSerializer.new(@traveler), jwt: token }, status: :accepted
+      token = encode_token(traveler.id)
+      render json: { traveler: TravelerSerializer.new(traveler), token: token }, status: :accepted
     else
-      render json: { message: 'Invalid username or password' }, status: :unauthorized
+      render json: { errors: 'Invalid username or password' }, status: :unauthorized
     end
   end
+
+    def auto_login
+     if session_traveler
+        render json: session_traveler
+     else
+       render json: {errors: "Error"}
+     end
+   end
+end
 
   # private
   #
@@ -19,5 +29,3 @@ class AuthController < ApplicationController
   #   # params { traveler: {username: 'Chandler Bing', password: 'hi' } }
   #   params.require(:traveler).permit(:username, :password)
   # end
-
-end

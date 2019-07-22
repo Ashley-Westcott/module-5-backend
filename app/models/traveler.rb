@@ -2,6 +2,7 @@ class Traveler < ApplicationRecord
 has_secure_password
 
 has_many :trips
+# accepts_nested_attributes_for :trips
 validates :username, uniqueness: {case_sensitive: true}
 
 validates :firstname, presence: true
