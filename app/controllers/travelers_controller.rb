@@ -5,7 +5,7 @@ class TravelersController < ApplicationController
     def index
         travelers = Traveler.all
         render json: travelers
-        # .to_json(:include => { :trips => { :include => :details}}) 
+        # .to_json(:include => { :trips => { :include => :details}})
     end
 
     def show
@@ -19,14 +19,22 @@ class TravelersController < ApplicationController
     end
 
     def create
-        traveler = Traveler.create(traveler_params)
-        if traveler.valid?
-          token = encode_token({ traveler_id: traveler.id })
-          render json: { traveler: TravelerSerializer.new(traveler), jwt: token }, status: :created
-        else
-          render json: { error: 'failed to create traveler' }, status: :not_acceptable
-        end
-    end
+      traveler = Traveler.new(
+			username: params[:username],
+			password: params[:password],
+      firstname: params[:firstname],
+      lastname: params[:lastname],
+      birthday: params[:birthday],
+      photo: params[:photo],
+      email: params[:email]
+		)
+		if traveler.save
+			token = encode_token(traveler.id)
+			render json: {traveler: TravelerSerializer.new(traveler), token: token}, include: "*.*.*"
+		else
+			render json: {errors: traveler.errors.full_messages}
+		end
+  end
 
     def edit
       traveler = Traveler.find(params[:id])
@@ -58,7 +66,7 @@ class TravelersController < ApplicationController
         :photo,
         :username,
         :email,
-        :password,
+        :password
         )
   end
 

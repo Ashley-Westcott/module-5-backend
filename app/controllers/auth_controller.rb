@@ -12,11 +12,12 @@ class AuthController < ApplicationController
     else
       render json: { errors: 'Invalid username or password' }, status: :unauthorized
     end
+
   end
 
     def auto_login
      if session_traveler
-        render json: session_traveler
+        render json: session_traveler, include: "*.*.*"
      else
        render json: {errors: "Error"}
      end

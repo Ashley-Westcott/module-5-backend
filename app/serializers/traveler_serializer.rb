@@ -1,5 +1,5 @@
 class TravelerSerializer < ActiveModel::Serializer
-  attributes :id, :firstname, :lastname, :birthday, :photo, :username, :password_digest
+  attributes :id, :firstname, :lastname, :birthday, :photo, :username, :email
 
   has_many :trips
 
