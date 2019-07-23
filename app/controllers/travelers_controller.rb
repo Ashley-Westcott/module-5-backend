@@ -4,7 +4,8 @@ class TravelersController < ApplicationController
 
     def index
         travelers = Traveler.all
-        render json: travelers, include: 'trips.details'
+        render json: travelers
+        # .to_json(:include => { :trips => { :include => :details}}) 
     end
 
     def show

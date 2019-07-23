@@ -11,6 +11,8 @@ validates :birthday, presence: true
 validates :email, uniqueness: true
 validates :username, uniqueness: {case_sensitive: true}
 
+ 
+
 
 def photo=(value)
     if value.blank?

@@ -8,7 +8,7 @@ class AuthController < ApplicationController
     if traveler && traveler.authenticate(params[:password])
       # encode token comes from ApplicationController
       token = encode_token(traveler.id)
-      render json: { traveler: TravelerSerializer.new(traveler), token: token }, status: :accepted
+      render json: { traveler: TravelerSerializer.new(traveler), token: token }, include: "*.*.*", status: :accepted
     else
       render json: { errors: 'Invalid username or password' }, status: :unauthorized
     end
