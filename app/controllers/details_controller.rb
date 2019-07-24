@@ -5,6 +5,16 @@ class DetailsController < ApplicationController
    render json: @details
   end
 
+  def new
+    detail = Detail.new
+    render json: detail
+  end
+
+  def create
+      detail = Detail.create(detail_params)
+      render json: detail
+  end
+
    def update
      @detail.update(detail_params)
      if @detail.save

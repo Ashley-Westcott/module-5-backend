@@ -12,7 +12,7 @@ validates :username, uniqueness: {case_sensitive: true}
 
 def photo=(value)
     if value.blank?
-      write_attribute :photo, 'https://user-images.githubusercontent.com/16608864/35882949-bbe13aa0-0bab-11e8-859c-ceda3b213818.jpeg'
+      write_attribute :photo, 'http://bestnycacupuncturist.com/wp-content/uploads/2016/11/anonymous-avatar-sm.jpg'
     else
       write_attribute :photo, value
     end

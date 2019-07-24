@@ -1,16 +1,26 @@
 class TripsController < ApplicationController
 
   def index
-   @trips = Trip.all
-   render json: @trips
+   trips = Trip.all
+   render json: trips
+  end
+
+  def new
+    trip = Trip.new
+    render json: trip
+  end
+
+  def create
+      trip = Trip.create(trip_params)
+      render json: trip
   end
 
    def update
-     @trip.update(trip_params)
-     if @trip.save
-       render json: @trip, status: :accepted
+     trip.update(trip_params)
+     if trip.save
+       render json: trip, status: :accepted
      else
-       render json: { errors: @trip.errors.full_messages }, status: :unprocessible_entity
+       render json: { errors: trip.errors.full_messages }, status: :unprocessible_entity
      end
    end
 
@@ -21,7 +31,7 @@ class TripsController < ApplicationController
    end
 
    def find_trip
-     @trip = Trip.find(params[:id])
+     trip = Trip.find(params[:id])
    end
 
 end
