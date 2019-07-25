@@ -1,13 +1,18 @@
 class DetailsController < ApplicationController
 
   def index
-   @details = Detail.all
-   render json: @details
+   details = Detail.all
+   render json: details
   end
 
   def new
     detail = Detail.new
     render json: detail
+  end
+
+  def show
+      detail = Detail.find(params[:id])
+      render json: detail
   end
 
   def create
@@ -16,12 +21,18 @@ class DetailsController < ApplicationController
   end
 
    def update
-     @detail.update(detail_params)
-     if @detail.save
-       render json: @detail, status: :accepted
+     detail.update(detail_params)
+     if detail.save
+       render json: detail, status: :accepted
      else
-       render json: { errors: @detail.errors.full_messages }, status: :unprocessible_entity
+       render json: { errors: detail.errors.full_messages }, status: :unprocessible_entity
      end
+   end
+
+   def destroy
+     detail = Detail.find(params[:id])
+     detail.destroy
+     render json: detail
    end
 
    private
@@ -31,7 +42,7 @@ class DetailsController < ApplicationController
    end
 
    def find_detail
-     @detail = Detail.find(params[:id])
+     detail = Detail.find(params[:id])
    end
 
 end
