@@ -4,7 +4,7 @@ class TravelersController < ApplicationController
 
     def index
         travelers = Traveler.all
-        render json: travelers
+        render json: travelers, include: "*.*.*"
         # .to_json(:include => { :trips => { :include => :details}})
     end
 
@@ -46,7 +46,7 @@ class TravelersController < ApplicationController
     def update
       traveler = Traveler.find(params[:id])
       traveler.update(traveler_params)
-      redirect_to traveler_path(traveler)
+      render json: traveler
     end
 
     def destroy
@@ -69,5 +69,7 @@ class TravelersController < ApplicationController
         :password
         )
   end
+
+
 
 end

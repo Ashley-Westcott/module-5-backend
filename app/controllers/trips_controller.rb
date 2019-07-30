@@ -10,6 +10,11 @@ class TripsController < ApplicationController
     render json: trip
   end
 
+  def show
+      trip = Trip.find(params[:id])
+      render json: trip
+  end
+
   def create
       trip = Trip.create(trip_params)
       render json: trip
@@ -22,6 +27,12 @@ class TripsController < ApplicationController
      else
        render json: { errors: trip.errors.full_messages }, status: :unprocessible_entity
      end
+   end
+
+   def destroy
+     trip = Trip.find(params[:id])
+     trip.destroy
+     render json: trip
    end
 
    private

@@ -20,13 +20,22 @@ class DetailsController < ApplicationController
       render json: detail
   end
 
+  def edit
+    details = Detail.find(params[:id])
+      if current_details == details
+      else redirect_to detailss_path
+    end
+  end
+
    def update
+     detail = Detail.find(params[:id])
      detail.update(detail_params)
-     if detail.save
-       render json: detail, status: :accepted
-     else
-       render json: { errors: detail.errors.full_messages }, status: :unprocessible_entity
-     end
+     render json: detail
+     # detail.update(detail_params)
+     # if detail.save
+     #   render json: detail, status: :accepted
+     # else
+     #   render json: { errors: detail.errors.full_messages }, status: :unprocessible_entity
    end
 
    def destroy

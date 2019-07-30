@@ -1,7 +1,8 @@
 class Traveler < ApplicationRecord
 has_secure_password
+before_destroy :destroy_trips
 
-has_many :trips
+has_many :trips, dependent: :delete_all
 
 validates :username, uniqueness: {case_sensitive: true}
 validates :firstname, presence: true
@@ -16,6 +17,10 @@ def photo=(value)
     else
       write_attribute :photo, value
     end
-  end
+end
+
+def destroy_trips
+  self.trips.destroy_all
+end
 
 end
